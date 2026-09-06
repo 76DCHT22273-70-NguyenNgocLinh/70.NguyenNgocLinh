@@ -1,0 +1,76 @@
+#include <iostream>
+#include <string>
+#include <iomanip>
+using namespace std;
+
+class SinhVien
+{
+private:
+    string hoten;
+    int namsinh;
+    float diem[4];
+
+public:
+    // Phuong thuc nhap
+    void nhap()
+    {
+        cout << "Nhap ho ten: ";
+        getline(cin, hoten);
+
+        cout << "Nhap nam sinh: ";
+        cin >> namsinh;
+
+        cout << "Nhap diem 4 mon:\n";
+        for (int i = 0; i < 4; i++)
+        {
+            cout << "Nhap diem mon " << i + 1 << ": ";
+            cin >> diem[i];
+        }
+
+        cin.ignore();
+    }
+
+    // Phuong thuc tinh diem trung binh
+    float tinhDTB()
+    {
+        float tong = 0;
+
+        for (int i = 0; i < 4; i++)
+        {
+            tong += diem[i];
+        }
+
+        return tong / 4;
+    }
+
+    // Phuong thuc xuat
+    void xuat()
+    {
+        cout << "Ho ten: " << hoten << endl;
+        cout << "Nam sinh: " << namsinh << endl;
+
+        cout << "Diem 4 mon: ";
+        for (int i = 0; i < 4; i++)
+        {
+            cout << diem[i] << " ";
+        }
+
+        cout << endl;
+
+        cout << "Diem trung binh: "
+             << fixed << setprecision(2)
+             << tinhDTB() << endl;
+    }
+};
+
+int main()
+{
+    SinhVien sv;
+
+    sv.nhap();
+
+    cout << "\nTHONG TIN SINH VIEN\n";
+    sv.xuat();
+
+    return 0;
+}
