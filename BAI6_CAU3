@@ -1,0 +1,89 @@
+#include <iostream>
+#include <string>
+#include <iomanip>
+using namespace std;
+
+class SinhVien {
+private:
+    string hoten;
+    int namsinh;
+    float diem[5];
+
+public:
+    void nhap() {
+        cout << "Nhap ho ten: ";
+        getline(cin, hoten);
+
+        cout << "Nhap nam sinh: ";
+        cin >> namsinh;
+
+        for (int i = 0; i < 5; i++) {
+            cout << "Nhap diem mon " << i + 1 << ": ";
+            cin >> diem[i];
+        }
+
+        cin.ignore();
+    }
+
+    float tinhDTB() {
+        float tong = 0;
+
+        for (int i = 0; i < 5; i++) {
+            tong += diem[i];
+        }
+
+        return tong / 5;
+    }
+
+    bool thiLai() {
+        for (int i = 0; i < 5; i++) {
+            if (diem[i] < 5) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    void xuat() {
+        cout << "Ho ten: " << hoten << endl;
+        cout << "Nam sinh: " << namsinh << endl;
+
+        cout << "Diem: ";
+        for (int i = 0; i < 5; i++) {
+            cout << diem[i] << " ";
+        }
+
+        cout << "\nDiem trung binh: "
+             << fixed << setprecision(2)
+             << tinhDTB() << endl;
+    }
+};
+
+int main() {
+    int n;
+
+    cout << "Nhap so luong sinh vien: ";
+    cin >> n;
+    cin.ignore();
+
+    SinhVien *ds = new SinhVien[n];
+
+    for (int i = 0; i < n; i++) {
+        cout << "\nNhap sinh vien thu " << i + 1 << ":\n";
+        ds[i].nhap();
+    }
+
+    cout << "\nDANH SACH SINH VIEN PHAI THI LAI\n";
+
+    for (int i = 0; i < n; i++) {
+        if (ds[i].thiLai()) {
+            ds[i].xuat();
+            cout << "---------------------\n";
+        }
+    }
+
+    delete[] ds;
+
+    return 0;
+}
