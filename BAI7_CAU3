@@ -1,0 +1,114 @@
+#include <iostream>
+#include <string>
+#include <iomanip>
+using namespace std;
+
+class SinhVien
+{
+private:
+    string hoten;
+    int namsinh;
+    float diem[4];
+
+public:
+    void nhap()
+    {
+        cout << "Nhap ho ten: ";
+        getline(cin, hoten);
+
+        cout << "Nhap nam sinh: ";
+        cin >> namsinh;
+
+        cout << "Nhap diem 4 mon:\n";
+        for (int i = 0; i < 4; i++)
+        {
+            cout << "Nhap diem mon " << i + 1 << ": ";
+            cin >> diem[i];
+        }
+
+        cin.ignore();
+    }
+
+    float tinhDTB()
+    {
+        float tong = 0;
+
+        for (int i = 0; i < 4; i++)
+        {
+            tong += diem[i];
+        }
+
+        return tong / 4;
+    }
+
+    void xuat()
+    {
+        cout << "Ho ten: " << hoten << endl;
+        cout << "Nam sinh: " << namsinh << endl;
+
+        cout << "Diem: ";
+        for (int i = 0; i < 4; i++)
+        {
+            cout << diem[i] << " ";
+        }
+
+        cout << endl;
+
+        cout << "Diem trung binh: "
+             << fixed << setprecision(2)
+             << tinhDTB() << endl;
+    }
+
+    // Kiem tra sinh vien co phai thi tot nghiep khong
+    bool phaiThiTotNghiep()
+    {
+        // Kiem tra diem trung binh
+        if (tinhDTB() >= 7)
+        {
+            return false;
+        }
+
+        // Kiem tra co mon nao duoi 5 khong
+        for (int i = 0; i < 4; i++)
+        {
+            if (diem[i] < 5)
+            {
+                return false;
+            }
+        }
+
+        return true;
+    }
+};
+
+int main()
+{
+    int n;
+
+    cout << "Nhap so luong sinh vien: ";
+    cin >> n;
+    cin.ignore();
+
+    SinhVien ds[100];
+
+    // Nhap danh sach sinh vien
+    for (int i = 0; i < n; i++)
+    {
+        cout << "\n===== SINH VIEN THU " << i + 1 << " =====\n";
+        ds[i].nhap();
+    }
+
+    // In sinh vien phai thi tot nghiep
+    cout << "\n\n===== SINH VIEN PHAI THI TOT NGHIEP =====\n";
+
+    for (int i = 0; i < n; i++)
+    {
+        if (ds[i].phaiThiTotNghiep())
+        {
+            ds[i].xuat();
+            cout << "--------------------------\n";
+        }
+    }
+
+    return 0;
+}
