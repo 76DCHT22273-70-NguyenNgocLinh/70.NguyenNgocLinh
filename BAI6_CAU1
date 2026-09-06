@@ -1,0 +1,14 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+class SinhVien {
+private:
+    string hoten;
+    int namsinh;
+    float diem[5];
+};
+
+int main() {
+    return 0;
+}
