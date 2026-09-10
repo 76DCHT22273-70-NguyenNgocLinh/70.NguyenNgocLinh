@@ -1,0 +1,112 @@
+#include <iostream>
+using namespace std;
+
+class PhanSo
+{
+private:
+    int tu, mau;
+
+public:
+    // Nhap phan so
+    void nhap()
+    {
+        cout << "Nhap tu: ";
+        cin >> tu;
+
+        do
+        {
+            cout << "Nhap mau: ";
+            cin >> mau;
+        } while (mau == 0);
+    }
+
+    // Xuat phan so
+    void xuat()
+    {
+        cout << tu << "/" << mau;
+    }
+
+    // Rut gon
+    void rutgon()
+    {
+        int a = tu, b = mau;
+
+        if (a < 0) a = -a;
+        if (b < 0) b = -b;
+
+        while (b != 0)
+        {
+            int r = a % b;
+            a = b;
+            b = r;
+        }
+
+        tu = tu / a;
+        mau = mau / a;
+
+        if (mau < 0)
+        {
+            tu = -tu;
+            mau = -mau;
+        }
+    }
+
+    // Cong
+    PhanSo cong(PhanSo ps)
+    {
+        PhanSo kq;
+        kq.tu = tu * ps.mau + ps.tu * mau;
+        kq.mau = mau * ps.mau;
+        kq.rutgon();
+        return kq;
+    }
+
+    // Tru
+    PhanSo tru(PhanSo ps)
+    {
+        PhanSo kq;
+        kq.tu = tu * ps.mau - ps.tu * mau;
+        kq.mau = mau * ps.mau;
+        kq.rutgon();
+        return kq;
+    }
+
+    // Nhan
+    PhanSo nhan(PhanSo ps)
+    {
+        PhanSo kq;
+        kq.tu = tu * ps.tu;
+        kq.mau = mau * ps.mau;
+        kq.rutgon();
+        return kq;
+    }
+
+    // Chia
+    PhanSo chia(PhanSo ps)
+    {
+        PhanSo kq;
+        kq.tu = tu * ps.mau;
+        kq.mau = mau * ps.tu;
+        kq.rutgon();
+        return kq;
+    }
+};
+
+int main()
+{
+    PhanSo ps1, ps2;
+
+    cout << "Nhap phan so 1:\n";
+    ps1.nhap();
+
+    cout << "Nhap phan so 2:\n";
+    ps2.nhap();
+
+    cout << "\nPhan so 1: ";
+    ps1.xuat();
+
+    cout << "\nPhan so 2: ";
+    ps2.xuat();
+
+    return 0;
+}
