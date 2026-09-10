@@ -1,0 +1,36 @@
+#include <iostream>
+using namespace std;
+
+class PhanSo
+{
+private:
+    int tu, mau;
+
+public:
+    // Hàm tạo không đối
+    PhanSo()
+    {
+        tu = 0;
+        mau = 1;
+    }
+
+    // Hàm tạo có đối
+    PhanSo(int t, int m)
+    {
+        tu = t;
+        mau = m;
+    }
+
+    // Hàm hủy
+    ~PhanSo()
+    {
+    }
+};
+
+int main()
+{
+    PhanSo ps1;
+    PhanSo ps2(2, 3);
+
+    return 0;
+}
