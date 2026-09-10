@@ -1,0 +1,83 @@
+#include <iostream>
+using namespace std;
+
+class PhanSo
+{
+private:
+    int tu, mau;
+
+public:
+    PhanSo()
+    {
+        tu = 0;
+        mau = 1;
+    }
+
+    PhanSo(int t, int m)
+    {
+        tu = t;
+        mau = m;
+    }
+
+    ~PhanSo()
+    {
+    }
+
+    // Nạp chồng toán tử nhập
+    friend istream& operator>>(istream& in, PhanSo& ps)
+    {
+        cout << "Nhap tu: ";
+        in >> ps.tu;
+        do
+        {
+            cout << "Nhap mau: ";
+            in >> ps.mau;
+        } while (ps.mau == 0);
+
+        return in;
+    }
+
+    // Nạp chồng toán tử xuất
+    friend ostream& operator<<(ostream& out, PhanSo ps)
+    {
+        out << ps.tu << "/" << ps.mau;
+        return out;
+    }
+
+    // Rút gọn
+    void rutGon()
+    {
+        int a = tu, b = mau;
+
+        if (a < 0) a = -a;
+        if (b < 0) b = -b;
+
+        while (b != 0)
+        {
+            int r = a % b;
+            a = b;
+            b = r;
+        }
+
+        tu /= a;
+        mau /= a;
+
+        if (mau < 0)
+        {
+            tu = -tu;
+            mau = -mau;
+        }
+    }
+};
+
+int main()
+{
+    PhanSo ps;
+
+    cin >> ps;
+    ps.rutGon();
+
+    cout << "Phan so: " << ps;
+
+    return 0;
+}
