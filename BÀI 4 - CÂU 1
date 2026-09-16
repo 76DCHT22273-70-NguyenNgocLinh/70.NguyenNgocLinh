@@ -1,0 +1,39 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+class Nguoi
+{
+protected:
+    string hoTen;
+    int namSinh;
+
+public:
+    Nguoi() {}
+    Nguoi(string ht, int ns)
+    {
+        hoTen = ht;
+        namSinh = ns;
+    }
+};
+
+class SinhVien : public Nguoi
+{
+private:
+    string maSV;
+    float diemTB;
+
+public:
+    SinhVien() {}
+    SinhVien(string ht, int ns, string ma, float diem)
+        : Nguoi(ht, ns)
+    {
+        maSV = ma;
+        diemTB = diem;
+    }
+};
+
+int main()
+{
+    return 0;
+}
