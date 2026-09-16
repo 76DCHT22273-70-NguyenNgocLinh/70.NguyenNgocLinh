@@ -1,0 +1,77 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+class Nguoi
+{
+protected:
+    string hoTen;
+    int namSinh;
+
+public:
+    Nguoi() {}
+
+    Nguoi(string ht, int ns)
+    {
+        hoTen = ht;
+        namSinh = ns;
+    }
+
+    void nhap()
+    {
+        cout << "Ho ten: ";
+        getline(cin, hoTen);
+        cout << "Nam sinh: ";
+        cin >> namSinh;
+        cin.ignore();
+    }
+
+    void xuat()
+    {
+        cout << "Ho ten: " << hoTen << endl;
+        cout << "Nam sinh: " << namSinh << endl;
+    }
+};
+
+class SinhVien : public Nguoi
+{
+private:
+    string maSV;
+    float diemTB;
+
+public:
+    SinhVien() {}
+
+    SinhVien(string ht, int ns, string ma, float diem)
+        : Nguoi(ht, ns)
+    {
+        maSV = ma;
+        diemTB = diem;
+    }
+
+    void nhap()
+    {
+        Nguoi::nhap();
+        cout << "Ma sinh vien: ";
+        getline(cin, maSV);
+        cout << "Diem trung binh: ";
+        cin >> diemTB;
+        cin.ignore();
+    }
+
+    void xuat()
+    {
+        Nguoi::xuat();
+        cout << "Ma sinh vien: " << maSV << endl;
+        cout << "Diem trung binh: " << diemTB << endl;
+    }
+};
+
+int main()
+{
+    SinhVien sv("Nguyen Ngoc Linh", 2007, "SV001", 8.5);
+
+    sv.xuat();
+
+    return 0;
+}
