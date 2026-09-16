@@ -1,0 +1,90 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+class Nguoi
+{
+protected:
+    string hoTen;
+    int namSinh;
+
+public:
+    void nhap()
+    {
+        cout << "Ho ten: ";
+        getline(cin, hoTen);
+        cout << "Nam sinh: ";
+        cin >> namSinh;
+        cin.ignore();
+    }
+
+    void xuat()
+    {
+        cout << hoTen << "\t" << namSinh;
+    }
+};
+
+class SinhVien : public Nguoi
+{
+private:
+    string maSV;
+    float diemTB;
+
+public:
+    void nhap()
+    {
+        Nguoi::nhap();
+
+        cout << "Ma SV: ";
+        getline(cin, maSV);
+
+        cout << "Diem TB: ";
+        cin >> diemTB;
+        cin.ignore();
+    }
+
+    void xuat()
+    {
+        Nguoi::xuat();
+        cout << "\t" << maSV << "\t" << diemTB << endl;
+    }
+
+    float getDiemTB()
+    {
+        return diemTB;
+    }
+};
+
+int main()
+{
+    int n;
+    cout << "Nhap n: ";
+    cin >> n;
+    cin.ignore();
+
+    SinhVien ds[100];
+
+    for (int i = 0; i < n; i++)
+    {
+        cout << "\nNhap sinh vien " << i + 1 << ":\n";
+        ds[i].nhap();
+    }
+    for (int i = 0; i < n - 1; i++)
+    {
+        for (int j = i + 1; j < n; j++)
+        {
+            if (ds[i].getDiemTB() < ds[j].getDiemTB())
+            {
+                SinhVien temp = ds[i];
+                ds[i] = ds[j];
+                ds[j] = temp;
+            }
+        }
+    }
+
+    cout << "\nDANH SACH SAU KHI SAP XEP:\n";
+    for (int i = 0; i < n; i++)
+        ds[i].xuat();
+
+    return 0;
+}
